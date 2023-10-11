@@ -21,6 +21,7 @@ Installing, Compiling and Running mySimRank
 * Once the repository is cloned, assuming its local path is the root directory ```/path/to/the/cloned/mySimRank``` open a terminal window and switch to the directory ```cd /path/to/the/cloned/mySimRank```;
 * Build and run the project using the command ```sbt clean compile run```
 * Alternatively, you can load the project into IntelliJ and compile and run it using the main entry point in [Main.scala](src/main/scala/Main.scala);
+* Update output directory in application.conf to be your output directory else program will use default directory.
 * You should make sure that the Java version that is used to compile this project matches the JVM version that is used to run the generated program jar from the command line, otherwise you may receive an error.
 
 Running mySimRank results in many log messages showing the progress of the execution, the last log entries can look like the following.
