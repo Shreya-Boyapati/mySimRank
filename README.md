@@ -35,6 +35,10 @@ File Input Format Counters
 The output file that is given by the last line of the logger can be opened to find the results of the simrank algorithm conducted by mapreduce.
 
 
+**Testing**
+===
+Testing on mySimRank was done using [Scalatest]([url](https://github.com/scalatest/)) dependency
+
 Maintenance notes
 ===
 This program is written by Shreya Boyapati
