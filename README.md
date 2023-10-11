@@ -37,7 +37,7 @@ The output file that is given by the last line of the logger can be opened to fi
 
 **Testing**
 ===
-Testing on mySimRank was done using [Scalatest]([url](https://github.com/scalatest/)) dependency
+Testing on mySimRank was done using [Scalatest]((https://github.com/scalatest/)) dependency
 
 Maintenance notes
 ===
