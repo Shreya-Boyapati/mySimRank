@@ -1,48 +1,20 @@
-Network Graph Simulation (NetGameSim) Experimental Platform
+SimRank (mySimRank) Algorithm
 =======================
-#### The goal of this experimental plaform is to allow users to generate large-scale random graphs and to create random perturbations of these graphs with precise records of what nodes and edges were perturbed. The toolkit allows the users to perform random walks on the graphs with the cost model for exploring the graph with these random walks. The functionality of this platform includes various algorithms on the graphs, graph visualization, walk cost models and (de)serialization of the generated graphs and the perturbed graphs deltas, i.e., the differences between a generated graphs and its perturbed counterpart. 
-![A generated graph with 300 nodes](./outputs/Graph300Nodes.png)
-This is an image of the generated graph with 300 nodes.
+#### The goal of this algorithm is to compare delta between two graphs that are computed by NetGameSim module
 
 Overview
 ---
-* NetGameSim uses [Google's Guava](https://github.com/google/guava) and [JGraphT](https://github.com/jgrapht/jgrapht) libraries for graph manipulations;
-* [Scalatest](https://github.com/scalatest/) dependency is used for testing;
-* [Typesafe configuration](https://github.com/lightbend/config#readme) dependency is used to manage configuration options in [application.conf](GenericSimUtilities/src/main/resources/application.conf);
-* [Logback classic](https://mvnrepository.com/artifact/ch.qos.logback/logback-classic) dependency is used for logging;
-* For visualization NetGameSim uses [GraphViz](https://graphviz.org/download/) package that should be installed independently;
-* NetGameSim also uses a [visualization library](https://github.com/nidi3/graphviz-java) for invoking GraphViz programmatically;
-* NetGameSim takes only one command-line parameter, i.e., the name of the output file that is used to serialize a generated graph and its perturbed equivalent as well as GraphViz visualization files;
-* Each generated graph contains an extra node that is called the ***initial node***, since it may be convenient for certain type of analyses to assume an existing entry point for a simulated system;
-* Scala parallel collection is used to parallelize graph generation and it achieves 10x speedup on multicore processor computers; it's recommended to use at least a Quad-core CPU with a minimum of 8 GB of RAM;
-* NetGameSim has been tested with Scala 3.x and the JVM 1.8 to 19. As an IntelliJ project it can be loaded and built within the IDE.
-* To build NetGameSim from the command line [SBT](https://www.scala-sbt.org/release/docs/Setup.html), [Scala](https://www.scala-lang.org/download/) and a [JDK/JVM](https://docs.oracle.com/en/java/javase/) should be installed and configured.
-* External plugins for the IntelliJ IDE settings and for creating a jar file are specified in ```plugins.sbt``` under the sources root project and other plugins can be substituted as needed:
-```scala
-addSbtPlugin("org.jetbrains.scala" % "sbt-ide-settings" % "1.1.1")
-addSbtPlugin("com.eed3si9n" % "sbt-assembly" % "2.1.0")
+* NetGameSim can be found at [https://github.com/0x1DOCD00D/NetGameSim]
+* 
 ```
 
 Installing, Compiling and Running NetGameSim 
 ===
-* Once all prerequisites are met, clone [NetGameSim](https://github.com/0x1DOCD00D/NetGameSim) using the command ```git clone```;
-* Once the repository is cloned, assuming its local path is the root directory ```/path/to/the/cloned/NetGameSim``` open a terminal window and switch to the directory ```cd /path/to/the/cloned/NetGameSim```;
-* Build the project using the command ```sbt clean compile assembly``` that results in the executable file located under ```target/scala-3.2.2/netmodelsim.jar``` relative to the root directory.
+* Once all prerequisites are met, clone [mySimRank](https://github.com/Shreya-Boyapati/mySimRank) using the command ```git clone```;
+* Once the repository is cloned, assuming its local path is the root directory ```/path/to/the/cloned/mySimRank``` open a terminal window and switch to the directory ```cd /path/to/the/cloned/mySimRank```;
+* Build and run the project using the command ```sbt clean compile run```
 * Alternatively, you can load the project into IntelliJ and compile and run it using the main entry point in [Main.scala](src/main/scala/Main.scala);
-* You should make sure that the Java version that is used to compile this project matches the JVM version that is used to run the generated program jar from the command line, otherwise you may receive a variant of the following error message: "Exception in thread "main" java.lang.UnsupportedClassVersionError: org/jgrapht/Graph has been compiled by a more recent version of the Java Runtime (class file version 55.0), this version of the Java Runtime only recognizes class file versions up to 52.0." A quick check using the command ```java -version``` shows "openjdk version 1.8.0_292" meaning that we should switch to a higher version of the JVM. First, we check to see what JDKs are installed using the command ```/usr/libexec/java_home -V``` that outputs a list of versions like the following.
-```shell
-Matching Java Virtual Machines (6):
-19.0.1 (x86_64) "Oracle Corporation" - "OpenJDK 19.0.1" /Users/drmark/Library/Java/JavaVirtualMachines/openjdk-19.0.1/Contents/Home
-18.0.1.1 (x86_64) "Oracle Corporation" - "OpenJDK 18.0.1.1" /Users/drmark/Library/Java/JavaVirtualMachines/openjdk-18.0.1.1/Contents/Home
-17.0.1 (x86_64) "Oracle Corporation" - "OpenJDK 17.0.1" /Users/drmark/Library/Java/JavaVirtualMachines/openjdk-17.0.1/Contents/Home
-14.0.1 (x86_64) "Oracle Corporation" - "Java SE 14.0.1" /Library/Java/JavaVirtualMachines/jdk-14.0.1.jdk/Contents/Home
-11.0.20.0-m1 (x86_64) "IBM Corporation" - "IBM Semeru Runtime Open Edition 11" /Users/drmark/Library/Java/JavaVirtualMachines/semeru-11.0.20/Contents/Home
-1.8.0_292 (x86_64) "AdoptOpenJDK" - "AdoptOpenJDK 8" /Library/Java/JavaVirtualMachines/adoptopenjdk-8.jdk/Contents/Home
-```
-To choose a higher version of the JVM we execute the following command ```export JAVA_HOME=`/usr/libexec/java_home -v 19.0.1` ``` that resolves the issue.
-* Once built you can execute the program using the following command ```java -Xms2G -Xmx30G -jar -DNGSimulator.NetModel.statesTotal=300  target/scala-3.2.2/netmodelsim.jar fileName``` where you can modify the memory allocation values for the command line arguments Xms and Xmx. 
-* If ```fileName``` is omitted from the command line then the default name ```NetGraph_<time stamp>.ngs``` will be used;
-* Configuration options in ```application.conf``` can be overwritten using the command line as it is shown with the option ```-D``` applied to the configuration option ```NGSimulator.NetModel.statesTotal```.
+* You should make sure that the Java version that is used to compile this project matches the JVM version that is used to run the generated program jar from the command line, otherwise you may receive an error.
 
 Running NetGameSim results in many log messages showing the progress of the execution and hopefully, if no error messages are shown then the last log entries can look like the following.
 ```log
