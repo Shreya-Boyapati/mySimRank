@@ -2,6 +2,11 @@ SimRank (mySimRank) Algorithm
 =======================
 #### The goal of this algorithm is to compare delta between two graphs that are computed by NetGameSim module
 
+**Author**
+===
+Shreya Boyapati
+sboyap2@uic.edu
+
 Overview
 ---
 * NetGameSim can be found at [https://github.com/0x1DOCD00D/NetGameSim]
@@ -45,11 +50,6 @@ Testing on mySimRank was done using [Scalatest](https://github.com/scalatest/) d
     3. removeNodesTest
     4. testShards
     5. multipleModificationsTest
-
-
-Maintenance notes
-===
-This program is written by Shreya Boyapati
 
 
 
