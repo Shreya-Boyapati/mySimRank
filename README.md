@@ -6,7 +6,7 @@ Overview
 ---
 * NetGameSim can be found at [https://github.com/0x1DOCD00D/NetGameSim]
 * 
-```
+  
 
 Installing, Compiling and Running NetGameSim 
 ===
