@@ -1,7 +1,3 @@
-import sbt.Keys.libraryDependencies
-
-import scala.collection.Seq
-
 ThisBuild / version := "0.1.0-SNAPSHOT"
 
 Global / excludeLintKeys += idePackagePrefix
@@ -26,18 +22,25 @@ lazy val commonDependencies = Seq(
   "org.scalatest" %% "scalatest" % scalaTestVersion % Test,
   "org.scalatestplus" %% "mockito-4-2" % "3.2.12.0-RC2" % Test,
   "com.typesafe" % "config" % typeSafeConfigVersion,
-  "ch.qos.logback" % "logback-classic" % logbackVersion,
-  "net.bytebuddy" % "byte-buddy" % netBuddyVersion
-).map(_.exclude("org.slf4j", "*"))
-
+  // Exclude other SLF4J bindings and include only logback-classic
+  "ch.qos.logback" % "logback-classic" % logbackVersion excludeAll(
+    ExclusionRule(organization = "org.slf4j"),
+    ExclusionRule(organization = "org.slf4j.impl")
+  ),
+  "net.bytebuddy" % "byte-buddy" % netBuddyVersion,
+  "org.apache.hadoop" % "hadoop-common" % "3.3.6",
+  "org.apache.hadoop" % "hadoop-mapreduce-client-core" % "3.3.6",
+  "org.apache.hadoop" % "hadoop-mapreduce-client-jobclient" % "3.3.6",
+  "org.graphstream" % "gs-core" % "2.0",
+  //"org.yaml" % "snakeyaml" % "2.0"
+)
 
 lazy val root = (project in file("."))
   .settings(
     scalaVersion := "3.2.2",
     name := "NetGameSim",
     idePackagePrefix := Some("com.lsc"),
-    libraryDependencies ++= commonDependencies,
-    libraryDependencies  ++= Seq("ch.qos.logback" % "logback-classic" % logbackVersion)
+    libraryDependencies ++= commonDependencies
   ).aggregate(NetModelGenerator,GenericSimUtilities).dependsOn(NetModelGenerator)
 
 lazy val NetModelGenerator = (project in file("NetModelGenerator"))
@@ -51,24 +54,22 @@ lazy val NetModelGenerator = (project in file("NetModelGenerator"))
       "commons-io" % "commons-io" % apacheCommonsVersion,
       "org.jgrapht" % "jgrapht-core" % jGraphTlibVersion,
       "org.jgrapht" % "jgrapht-guava" % guavaAdapter2jGraphtVersion,
-    ),
-    libraryDependencies  ++= Seq("ch.qos.logback" % "logback-classic" % logbackVersion)
+    )
   ).dependsOn(GenericSimUtilities)
 
 lazy val GenericSimUtilities = (project in file("GenericSimUtilities"))
   .settings(
     scalaVersion := "3.2.2",
     name := "GenericSimUtilities",
-    libraryDependencies ++= commonDependencies,
-    libraryDependencies  ++= Seq("ch.qos.logback" % "logback-classic" % logbackVersion)
+    libraryDependencies ++= commonDependencies
   )
 
 
 scalacOptions ++= Seq(
-      "-deprecation", // emit warning and location for usages of deprecated APIs
-      "--explain-types", // explain type errors in more detail
-      "-feature" // emit warning and location for usages of features that should be imported explicitly
-    )
+  "-deprecation", // emit warning and location for usages of deprecated APIs
+  "--explain-types", // explain type errors in more detail
+  "-feature" // emit warning and location for usages of features that should be imported explicitly
+)
 
 compileOrder := CompileOrder.JavaThenScala
 test / fork := true
