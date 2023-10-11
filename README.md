@@ -5,6 +5,7 @@ SimRank (mySimRank) Algorithm
 **Author**
 ===
 Shreya Boyapati
+
 sboyap2@uic.edu
 
 Overview
