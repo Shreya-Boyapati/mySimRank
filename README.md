@@ -5,10 +5,16 @@ SimRank (mySimRank) Algorithm
 Overview
 ---
 * NetGameSim can be found at [https://github.com/0x1DOCD00D/NetGameSim]
-* 
-  
+* Key changes made are found in
+  1. Main.scala
+  2. createShards.scala
+  3. simRank.scala
+* Main.scala contains driver code of the mapreduce job and gives the final result
+* createShards.scala contains the method to create shards of two NetGraphs and write them to a text file
+* simRank.scala contains the simrank algorithm that detects the delta between two given graphs
 
-Installing, Compiling and Running NetGameSim 
+
+Installing, Compiling and Running mySimRank 
 ===
 * Once all prerequisites are met, clone [mySimRank](https://github.com/Shreya-Boyapati/mySimRank) using the command ```git clone```;
 * Once the repository is cloned, assuming its local path is the root directory ```/path/to/the/cloned/mySimRank``` open a terminal window and switch to the directory ```cd /path/to/the/cloned/mySimRank```;
