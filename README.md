@@ -16,6 +16,7 @@ Overview
 
 Installing, Compiling and Running mySimRank 
 ===
+* To build NetGameSim from the command line [SBT](https://www.scala-sbt.org/release/docs/Setup.html), [Scala](https://www.scala-lang.org/download/) and a [JDK/JVM](https://docs.oracle.com/en/java/javase/) should be installed and configured
 * Once all prerequisites are met, clone [mySimRank](https://github.com/Shreya-Boyapati/mySimRank) using the command ```git clone```;
 * Once the repository is cloned, assuming its local path is the root directory ```/path/to/the/cloned/mySimRank``` open a terminal window and switch to the directory ```cd /path/to/the/cloned/mySimRank```;
 * Build and run the project using the command ```sbt clean compile run```
@@ -37,7 +38,13 @@ The output file that is given by the last line of the logger can be opened to fi
 
 **Testing**
 ===
-Testing on mySimRank was done using [Scalatest]((https://github.com/scalatest/)) dependency
+Testing on mySimRank was done using [Scalatest](https://github.com/scalatest/) dependency. Tests can be found in NetGraphAlgebraDefs/
+    1. equalSimrankTest
+    2. removeEdgeTest
+    3. removeNodesTest
+    4. testShards
+    5. multipleModificationsTest
+
 
 Maintenance notes
 ===
