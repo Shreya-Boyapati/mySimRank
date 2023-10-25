@@ -1,0 +1,9 @@
+Student - Shreya Boyapati
+
+=> No comparisions with the original Yaml file produced by NetGameSim, no Metrics for your algorithm, no video for your AWS deployment = -1%
+=> Hardcoded file path myDir = -0.1%
+=> using a for loop in createShards.scala = -0.1%
+
+Your submission is a good attempt at solving this problem. Your code is clean, and your comments are good. However, I would have liked to see all the requirements achieved. Your project structure could use some attention, as it is rather fractured at the moment. I would also recommend learning how to use git through commands, since I can see that all your commits were made through the website.
+
+Grade =  13.8%
